@@ -42,9 +42,7 @@ function draw() {
   translate(10, height * 0.9);
 
   //Sort bars
-  for (let i = 0; i < numOfBars; i++) {
-    sortBars(i);
-  }
+  bubbleSort();
 
   //Draw bars
   for (let i = 0; i < bars.length; i++) {
@@ -53,6 +51,7 @@ function draw() {
   }
 }
 
+//Generates all bars
 function generateBars() {
   while (bars.length < numOfBars) {
     let rand = Math.floor(Math.random() * numOfBars) + 1;
@@ -60,20 +59,21 @@ function generateBars() {
   }
 }
 
-function sortBars(index) {
-  let temp = bars[index - 1];
-  if (bars[index] < bars[index - 1]) {
-    bars[index - 1] = bars[index];
-    bars[index] = temp;
+//The BubbleSort sorting algorithm
+function bubbleSort() {
+  for (let i = 0; i < numOfBars; i++) {
+    let temp = bars[i - 1];
+    if (bars[i] < bars[i - 1]) {
+      bars[i - 1] = bars[i];
+      bars[i] = temp;
+    }
   }
 }
 
+//Re-seed the animation with random bars
 function resetArray() {
   for (let i = bars.length; i >= 0; i--) {
     bars.pop();
   }
   generateBars();
-  for (let i = 0; i < numOfBars; i++) {
-    sortBars(i);
-  }
 }
